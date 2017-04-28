@@ -77,7 +77,7 @@ function add_nexus2_redhat_repos() {
 
   add_nexus2_repo npm_proxy https://registry.npmjs.org $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
 
-  add_nexus2_group_repo npm_proxy public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URLL
+  add_nexus2_group_repo npm_proxy public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
 }
 
 
