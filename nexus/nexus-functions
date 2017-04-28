@@ -1,3 +1,22 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @andyneeb
+ Sign out
+ Unwatch 1
+  Star 0
+ Fork 16 andyneeb/nexus
+forked from OpenShiftDemos/nexus
+ Code  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy pathnexus/scripts/nexus-functions
+a9eec01  on Feb 19
+@siamaksade siamaksade moved redhat ga repo to the first in the group
+1 contributor
+RawBlameHistory    
+149 lines (127 sloc)  5.52 KB
 #################################################################
 # Functions for Managing Sonatype Nexus                         #
 #                                                               #
@@ -13,11 +32,10 @@
 
 function add_nexus2_repo() {
   local _REPO_ID=$1
-  local _REPO_TYPE=$2
-  local _REPO_URL=$3
-  local _NEXUS_USER=$4
-  local _NEXUS_PWD=$5
-  local _NEXUS_URL=$6
+  local _REPO_URL=$2
+  local _NEXUS_USER=$3
+  local _NEXUS_PWD=$4
+  local _NEXUS_URL=$5
 
   read -r -d '' _REPO_JSON << EOM
 {
@@ -32,7 +50,7 @@ function add_nexus2_repo() {
       "metadataMaxAge": 1440,
       "itemMaxAge": 1440,
       "repoPolicy": "RELEASE",
-      "provider": "$_REPO_TYPE",
+      "provider": "maven2",
       "providerRole": "org.sonatype.nexus.proxy.repository.Repository",
       "downloadRemoteIndexes": true,
       "autoBlockActive": true,
@@ -76,17 +94,15 @@ function add_nexus2_redhat_repos() {
   local _NEXUS_PWD=$2
   local _NEXUS_URL=$3
 
-  add_nexus2_repo redhat-ga maven2 https://maven.repository.redhat.com/ga/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
-  add_nexus2_repo redhat-ea maven2 https://maven.repository.redhat.com/earlyaccess/all/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
-  add_nexus2_repo redhat-techpreview maven2 https://maven.repository.redhat.com/techpreview/all $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
-  add_nexus2_repo jboss-ce maven2 https://repository.jboss.org/nexus/content/groups/public/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
-  add_nexus2_repo npm_proxy npm https://registry.npmjs.org/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo redhat-ga https://maven.repository.redhat.com/ga/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo redhat-ea https://maven.repository.redhat.com/earlyaccess/all/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo redhat-techpreview https://maven.repository.redhat.com/techpreview/all $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo jboss-ce https://repository.jboss.org/nexus/content/groups/public/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
 
   add_nexus2_group_repo jboss-ce public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
   add_nexus2_group_repo redhat-ea public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
   add_nexus2_group_repo redhat-techpreview public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
   add_nexus2_group_repo redhat-ga public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
-  add_nexus2_group_repo npm_proxy public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
 }
 
 
@@ -149,3 +165,5 @@ function add_nexus3_redhat_repos() {
 
   add_nexus3_group_repo redhat-ga,redhat-ea,redhat-techpreview,jboss-ce,maven-central,maven-releases,maven-snapshots maven-all-public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
 }
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
