@@ -8,15 +8,16 @@
 #################################################################
 
 #
-# add_nexus2_repo [repo-id] [repo-url] [nexus-username] [nexus-password] [nexus-url]
+# add_nexus2_repo [repo-id] [repo-provider] [repo-url] [nexus-username] [nexus-password] [nexus-url]
 #
 
 function add_nexus2_repo() {
   local _REPO_ID=$1
-  local _REPO_URL=$2
-  local _NEXUS_USER=$3
-  local _NEXUS_PWD=$4
-  local _NEXUS_URL=$5
+  local _REPO_PROVIDER=$2
+  local _REPO_URL=$3
+  local _NEXUS_USER=$4
+  local _NEXUS_PWD=$5
+  local _NEXUS_URL=$6
 
   read -r -d '' _REPO_JSON << EOM
 {
@@ -31,7 +32,7 @@ function add_nexus2_repo() {
       "metadataMaxAge": 1440,
       "itemMaxAge": 1440,
       "repoPolicy": "RELEASE",
-      "provider": "maven2",
+      "provider": "$_REPO_PROVIDER",
       "providerRole": "org.sonatype.nexus.proxy.repository.Repository",
       "downloadRemoteIndexes": true,
       "autoBlockActive": true,
@@ -75,14 +76,16 @@ function add_nexus2_redhat_repos() {
   local _NEXUS_PWD=$2
   local _NEXUS_URL=$3
 
-  add_nexus2_repo redhat-ga https://maven.repository.redhat.com/ga/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
-  add_nexus2_repo redhat-ea https://maven.repository.redhat.com/earlyaccess/all/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
-  add_nexus2_repo redhat-techpreview https://maven.repository.redhat.com/techpreview/all $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
-  add_nexus2_repo jboss-ce https://repository.jboss.org/nexus/content/groups/public/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo redhat-ga maven2 https://maven.repository.redhat.com/ga/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo redhat-ea maven2 https://maven.repository.redhat.com/earlyaccess/all/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo redhat-techpreview maven2 https://maven.repository.redhat.com/techpreview/all $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo jboss-ce maven2 https://repository.jboss.org/nexus/content/groups/public/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_repo npm_proxy npm https://registry.npmjs.org/ $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
 
   add_nexus2_group_repo jboss-ce public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
   add_nexus2_group_repo redhat-ea public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
   add_nexus2_group_repo redhat-techpreview public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
   add_nexus2_group_repo redhat-ga public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
+  add_nexus2_group_repo npm_proxy public $_NEXUS_USER $_NEXUS_PWD $_NEXUS_URL
 }
 
