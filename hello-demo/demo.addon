@@ -17,20 +17,22 @@ oc policy add-role-to-user edit system:serviceaccount:dev:jenkins -n test
 oc policy add-role-to-user edit system:serviceaccount:dev:jenkins -n prod
 
 # Setup DC & Route in test & prod stage
-# TBD
+echo *** Setup DC & Route in Test & Prod Stage ***
+echo
 
 # Gogs
-echo 'Setup Gogs & Demo repo'
-echo 'register user dev'
-echo 'Import https://github.com/andyneeb/hello to Gogs'
-
+echo *** Setup Gogs & Demo repo ***
+echo register user dev
+echo Import https://github.com/andyneeb/hello to Gogs
+echo
 
 # Nexus
-echo 'Setup Nexus as NPM mirror'
-echo 'login as admin/admin123'
-echo 'add proxy repo ->	id/name: npm_proxy -> url: https://registry.npmjs.org/'
+echo *** Setup Nexus as NPM mirror ***
+echo login as admin/admin123
+echo add proxy repo ->	id/name: npm_proxy -> url: https://registry.npmjs.org/
+echo
 
 # Misc stuff
-echo 'Add gogs repo as example to node.js template'
-echo 'edit openshift/nodejs template'
+echo *** Add gogs repo as example to node.js template ***
+echo edit openshift/nodejs template
 
