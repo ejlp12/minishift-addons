@@ -14,17 +14,17 @@ oc policy add-role-to-user edit system:serviceaccount:dev:jenkins -n test
 oc policy add-role-to-user edit system:serviceaccount:dev:jenkins -n prod
 
 # Import https://github.com/andyneeb/hello to Gogs
-register user dev
-migrate repo
+# register user dev
+# migrate repo
 
 
 # Setup Nexus as NPM mirror
-login as admin/admin123
-add proxy repo
-	id/name: npm_proxy
-	url: https://registry.npmjs.org/
+# login as admin/admin123
+# add proxy repo
+#	id/name: npm_proxy
+#	url: https://registry.npmjs.org/
 
 
 # Add gogs repo as example to node.js template
-edit openshift/nodejs template
+# edit openshift/nodejs template
 
