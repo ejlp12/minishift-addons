@@ -1,4 +1,9 @@
 # Name: simple-pipeline
-# Description: Allows authenticated users to run images unrestricted
+# Description: Jenkins Pipeline Examples
 
 oc create -n openshift -f simple-pipeline.yaml
+#oc create -n openshift -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/bluegreen-pipeline.yaml
+#oc create -n openshift -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/mapsapp-pipeline.yaml
+#oc create -n openshift -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/maven-pipeline.yaml
+#oc create -n openshift -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/openshift-client-plugin-pipeline.yaml
+#oc create -n openshift -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/samplepipeline.yaml

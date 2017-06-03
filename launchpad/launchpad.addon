@@ -1,0 +1,8 @@
+# Name: launchpad
+# Description: Create launcher.openshift.io locally
+
+oc new-project launchpad
+
+oc create -n launchpad -f https://raw.githubusercontent.com/openshiftio/launchpad-templates/v4/openshift/launchpad-template.yaml
+
+oc new-app launchpad -n launchpad -p LAUNCHPAD_MISSIONCONTROL_GITHUB_USERNAME=$GITHUB_USERNAME -p LAUNCHPAD_MISSIONCONTROL_GITHUB_TOKEN=$GITHUB_TOKEN -p LAUNCHPAD_MISSIONCONTROL_OPENSHIFT_CONSOLE_URL=https://#{ip}.nip.io:8443 -p LAUNCHPAD_MISSIONCONTROL_OPENSHIFT_API_URL=https://openshift.default.svc.cluster.local -p LAUNCHPAD_KEYCLOAK_URL= -p LAUNCHPAD_KEYCLOAK_REALM= -p LAUNCHPAD_MISSIONCONTROL_OPENSHIFT_USERNAME=admin -p LAUNCHPAD_MISSIONCONTROL_OPENSHIFT_PASSWORD=redhat -p LAUNCHPAD_FRONTEND_HOST=launchpad-frontend.#{ip}.nip.io
