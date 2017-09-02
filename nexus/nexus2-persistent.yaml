@@ -31,21 +31,23 @@ objects:
     selector:
       deploymentconfig: ${SERVICE_NAME}
     strategy:
-      rollingParams:
-        intervalSeconds: 1
-        maxSurge: 25%
-        maxUnavailable: 25%
-        timeoutSeconds: 600
-        updatePeriodSeconds: 1
+      activeDeadlineSeconds: 21600
+      recreateParams:
         post:
-          failurePolicy: Abort
           execNewPod:
-            containerName: ${SERVICE_NAME}
             command:
-              - "/bin/bash"
-              - "-c"
-              - "curl -o /tmp/nexus-functions -s https://raw.githubusercontent.com/andyneeb/minishift-addons/master/nexus/nexus-functions; source /tmp/nexus-functions; add_nexus2_redhat_repos admin admin123 http://${SERVICE_NAME}:8081"
-      type: Rolling
+              - /bin/bash
+              - '-c'
+              - >-
+                curl -o /tmp/nexus-functions -s
+                https://raw.githubusercontent.com/andyneeb/minishift-addons/master/nexus/nexus-functions;
+                source /tmp/nexus-functions; add_nexus2_redhat_repos admin
+                admin123 http://nexus:8081
+            containerName: nexus
+          failurePolicy: Abort
+        timeoutSeconds: 600
+      resources: {}
+      type: Recreate
     template:
       metadata:
         labels:
